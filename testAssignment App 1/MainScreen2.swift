@@ -12,6 +12,7 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 	
 	private var button = CustomButton()
 	private var textField = UITextField()
+	private let defaults = UserDefaults()
 
 	
 
@@ -76,12 +77,21 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 	func delegateButtonTapped() {
 		let destinationVC = MainScreen1()
 		let input = textField.text!
-		
+
 		if input == "" { self.navigationController?.popToRootViewController(animated: true) }
-		
+
 		destinationVC.input = input
 		navigationController?.pushViewController(destinationVC, animated: true)
 		
+		
+//		ONE MORE WAY TO SAVE DATA
+//
+//		COMMENT OUT CODE BELLOW AND DELETE CODE ABOVE TO CHECK IT
+//
+//		let input = textField.text!
+//		defaults.set(input, forKey: "SavedLabel")
+//		navigationController?.popViewController(animated: true)
+
 		
 	}
 	

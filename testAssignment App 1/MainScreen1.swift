@@ -15,6 +15,7 @@ class MainScreen1: UIViewController, MyDelegate {
 	
 	
     var label = UILabel()
+	let defaults = UserDefaults()
 	
     private var button = CustomButton()
 	var input: String! {
@@ -32,8 +33,14 @@ class MainScreen1: UIViewController, MyDelegate {
 		navigationItem.hidesBackButton = true
         
         setupView()
+		
         
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		setLabelFromDefaults()
+	}
     
 	private func setButton() {
 		view.addSubview(button)
@@ -69,6 +76,13 @@ class MainScreen1: UIViewController, MyDelegate {
 		
 		
 		
+	}
+	
+	private func setLabelFromDefaults() {
+		
+		if let input = defaults.string(forKey: "SavedLabel") {
+			label.text = input
+		}
 	}
 	
 	func delegateButtonTapped() {
