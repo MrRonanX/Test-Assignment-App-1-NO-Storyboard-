@@ -25,9 +25,9 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 		}
 		return container
 	}()
-
 	
-
+	
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -66,11 +66,11 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 		textField.translatesAutoresizingMaskIntoConstraints = false
 		textField.placeholder = "Enter text"
 		textField.autocorrectionType = .no
-        textField.keyboardType = .default
-        textField.returnKeyType = .continue
-        textField.borderStyle = .roundedRect
-        textField.textAlignment = .center
-        textField.contentVerticalAlignment = .center
+		textField.keyboardType = .default
+		textField.returnKeyType = .continue
+		textField.borderStyle = .roundedRect
+		textField.textAlignment = .center
+		textField.contentVerticalAlignment = .center
 		textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
 		textField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		
@@ -80,7 +80,7 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 	
 	@objc private func buttonTapped(_ sender: CustomButton) {
 		
-			self.delegateButtonTapped()
+		self.delegateButtonTapped()
 		
 		
 		
@@ -91,9 +91,9 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 		deleteLastLabelFromCoreData()
 		let destinationVC = MainScreen1()
 		let input = textField.text!
-
+		
 		if input == "" { self.navigationController?.popToRootViewController(animated: true) }
-
+		
 		destinationVC.input = input
 		navigationController?.pushViewController(destinationVC, animated: true)
 		
@@ -101,12 +101,13 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 //		ONE MORE WAY TO SAVE DATA    --> USER DEFAULTS
 //
 //		COMMENT OUT CODE BELLOW AND DELETE CODE ABOVE TO CHECK IT
+//		ALSO COMMENT OUT METHOD IN VIEW WILL APPEAR IN SCREEN 1
 //
 //		let input = textField.text!
 //		defaults.set(input, forKey: "SavedLabel")
 //		navigationController?.popViewController(animated: true)
-		
-		
+
+
 //		ONE MORE WAY TO SAVE DATA    --> CORE DATA
 //
 //		COMMENT OUT CODE BELLOW AND DELETE CODE ABOVE TO CHECK IT
@@ -121,7 +122,7 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 	
 	fileprivate func deleteLastLabelFromCoreData() {
 		let context = persistentContainer.viewContext
-	
+		
 		let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "SavedLabel")
 		let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 		
@@ -134,7 +135,7 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 	}
 	
 	fileprivate func saveToCoreData() {
-
+		
 		
 		let userInput = textField.text!
 		

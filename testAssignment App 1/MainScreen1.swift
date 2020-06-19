@@ -24,38 +24,38 @@ class MainScreen1: UIViewController, MyDelegate {
 		}
 		return container
 	}()
-
 	
 	
-    var label = UILabel()
+	
+	var label = UILabel()
 	let defaults = UserDefaults()
 	
-    private var button = CustomButton()
+	private var button = CustomButton()
 	var input: String! {
 		didSet {
 			label.text = input
 		}
 	}
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       
-        
-        self.title = "Screen 1"
-        view.backgroundColor = .white
-		navigationItem.hidesBackButton = true
-        
-        setupView()
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		
-        
-    }
+		
+		self.title = "Screen 1"
+		view.backgroundColor = .white
+		navigationItem.hidesBackButton = true
+		
+		setupView()
+		
+		
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		//setLabelFromDefaults()
 		setLabelFromCoreData()
 	}
-    
+	
 	private func setButton() {
 		view.addSubview(button)
 		button.delegate = self
@@ -69,24 +69,24 @@ class MainScreen1: UIViewController, MyDelegate {
 	}
 	
 	private func setupView() {
-        view.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
-        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		view.addSubview(label)
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+		label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		
-//		ONE MORE WAY TO SET LABEL
-//
-//		if let input = input {
-//			label.text = input
-//		}
-        
+		//		ONE MORE WAY TO SET LABEL
+		//
+		//		if let input = input {
+		//			label.text = input
+		//		}
+		
 		setButton()
-
-    }
-    
-    @objc private func buttonTapped(_ sender: CustomButton) {
 		
-			self.delegateButtonTapped()
+	}
+	
+	@objc private func buttonTapped(_ sender: CustomButton) {
+		
+		self.delegateButtonTapped()
 		
 		
 		
@@ -102,7 +102,7 @@ class MainScreen1: UIViewController, MyDelegate {
 	private func loadLabelFromCoreData() -> String? {
 		
 		let context = persistentContainer.viewContext
-	
+		
 		let fetchRequest = NSFetchRequest<SavedLabel>(entityName: "SavedLabel")
 		
 		do {
@@ -126,7 +126,7 @@ class MainScreen1: UIViewController, MyDelegate {
 		
 		navigationController?.pushViewController(nextViewController, animated: true)
 	}
-
-
+	
+	
 }
 
