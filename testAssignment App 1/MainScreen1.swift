@@ -7,11 +7,24 @@
 //
 
 import UIKit
+import CoreData
+
 protocol MyDelegate: class {
 	func delegateButtonTapped()
 }
 
 class MainScreen1: UIViewController, MyDelegate {
+	
+	let persistentContainer: NSPersistentContainer = {
+		let container = NSPersistentContainer(name: "LabelSaver")
+		container.loadPersistentStores { (storeDescription, error) in
+			if let error = error {
+				fatalError("Loading of store failed \(error)")
+			}
+		}
+		return container
+	}()
+
 	
 	
     var label = UILabel()
@@ -39,7 +52,8 @@ class MainScreen1: UIViewController, MyDelegate {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		setLabelFromDefaults()
+		//setLabelFromDefaults()
+		setLabelFromCoreData()
 	}
     
 	private func setButton() {
@@ -82,6 +96,27 @@ class MainScreen1: UIViewController, MyDelegate {
 		
 		if let input = defaults.string(forKey: "SavedLabel") {
 			label.text = input
+		}
+	}
+	
+	private func loadLabelFromCoreData() -> String? {
+		
+		let context = persistentContainer.viewContext
+	
+		let fetchRequest = NSFetchRequest<SavedLabel>(entityName: "SavedLabel")
+		
+		do {
+			let labelText = try context.fetch(fetchRequest)
+			return labelText.first?.text
+		} catch {
+			print("Error loading data ---> \(error.localizedDescription)")
+		}
+		return nil
+	}
+	
+	private func setLabelFromCoreData() {
+		if let labelText = loadLabelFromCoreData() {
+			label.text = labelText
 		}
 	}
 	

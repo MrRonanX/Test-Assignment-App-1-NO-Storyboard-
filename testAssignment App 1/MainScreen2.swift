@@ -7,12 +7,24 @@
 //
 
 import UIKit
+import CoreData
+
 
 class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 	
 	private var button = CustomButton()
 	private var textField = UITextField()
 	private let defaults = UserDefaults()
+	
+	let persistentContainer: NSPersistentContainer = {
+		let container = NSPersistentContainer(name: "LabelSaver")
+		container.loadPersistentStores { (storeDescription, error) in
+			if let error = error {
+				fatalError("Loading of store failed \(error)")
+			}
+		}
+		return container
+	}()
 
 	
 
@@ -74,7 +86,9 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 		
 	}
 	
+	
 	func delegateButtonTapped() {
+		deleteLastLabelFromCoreData()
 		let destinationVC = MainScreen1()
 		let input = textField.text!
 
@@ -84,20 +98,58 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 		navigationController?.pushViewController(destinationVC, animated: true)
 		
 		
-//		ONE MORE WAY TO SAVE DATA
+//		ONE MORE WAY TO SAVE DATA    --> USER DEFAULTS
 //
 //		COMMENT OUT CODE BELLOW AND DELETE CODE ABOVE TO CHECK IT
 //
 //		let input = textField.text!
 //		defaults.set(input, forKey: "SavedLabel")
 //		navigationController?.popViewController(animated: true)
-
 		
+		
+//		ONE MORE WAY TO SAVE DATA    --> CORE DATA
+//
+//		COMMENT OUT CODE BELLOW AND DELETE CODE ABOVE TO CHECK IT
+//
+//
+//		deleteLastLabelFromCoreData()
+//		saveToCoreData()
+//		navigationController?.popViewController(animated: true)
 	}
 	
 	
 	
+	fileprivate func deleteLastLabelFromCoreData() {
+		let context = persistentContainer.viewContext
 	
+		let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "SavedLabel")
+		let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+		
+		do {
+			try context.execute(deleteRequest)
+		} catch {
+			print("Error deleting data ---> \(error.localizedDescription)")
+		}
+		
+	}
+	
+	fileprivate func saveToCoreData() {
+
+		
+		let userInput = textField.text!
+		
+		let context = persistentContainer.viewContext
+		let label = NSEntityDescription.insertNewObject(forEntityName: "SavedLabel", into: context) as! SavedLabel
+		
+		label.text = userInput
+		
+		do {
+			try context.save()
+			
+		} catch {
+			print("Error saving data ---> \(error.localizedDescription)")
+		}
+	}
 	
 	
 }
