@@ -9,12 +9,18 @@
 import UIKit
 import CoreData
 
+protocol PassData {
+	func transferData(dataFromVC2: String)
+}
+
 
 class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 	
 	private var button = CustomButton()
 	private var textField = UITextField()
 	private let defaults = UserDefaults()
+	
+	var delegate: PassData?
 	
 	let persistentContainer: NSPersistentContainer = {
 		let container = NSPersistentContainer(name: "LabelSaver")
@@ -89,15 +95,28 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 	
 	func delegateButtonTapped() {
 		deleteLastLabelFromCoreData()
-		let destinationVC = MainScreen1()
+		
+
+		
+		//FIXED POP TO NAVIGATION CONTROLLER
+		
 		let input = textField.text!
+		if let rootVC = navigationController?.viewControllers.first as? MainScreen1 {
+			rootVC.input = input
+		}
+		navigationController?.popToRootViewController(animated: true)
 		
-		if input == "" { self.navigationController?.popToRootViewController(animated: true) }
-		
-		destinationVC.input = input
-		navigationController?.pushViewController(destinationVC, animated: true)
 		
 		
+//		let destinationVC = MainScreen1()
+//		let input = textField.text!
+//
+//		if input == "" { self.navigationController?.popToRootViewController(animated: true) }
+//
+//		destinationVC.input = input
+//		navigationController?.pushViewController(destinationVC, animated: true)
+//
+//
 //		ONE MORE WAY TO SAVE DATA    --> USER DEFAULTS
 //
 //		COMMENT OUT CODE BELLOW AND DELETE CODE ABOVE TO CHECK IT

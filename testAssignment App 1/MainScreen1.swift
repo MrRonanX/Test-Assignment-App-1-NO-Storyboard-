@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+
+
 protocol MyDelegate: class {
 	func delegateButtonTapped()
 }
@@ -29,6 +31,7 @@ class MainScreen1: UIViewController, MyDelegate {
 	
 	var label = UILabel()
 	let defaults = UserDefaults()
+	var secondVC = MainScreen2()
 	
 	private var button = CustomButton()
 	var input: String! {
@@ -39,7 +42,7 @@ class MainScreen1: UIViewController, MyDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+		secondVC.delegate = self
 		
 		self.title = "Screen 1"
 		view.backgroundColor = .white
@@ -54,6 +57,7 @@ class MainScreen1: UIViewController, MyDelegate {
 		super.viewWillAppear(animated)
 		//setLabelFromDefaults()
 		setLabelFromCoreData()
+		
 	}
 	
 	private func setButton() {
@@ -130,3 +134,10 @@ class MainScreen1: UIViewController, MyDelegate {
 	
 }
 
+extension MainScreen1: PassData {
+	func transferData(dataFromVC2: String) {
+		label.text = dataFromVC2
+	}
+	
+	
+}
