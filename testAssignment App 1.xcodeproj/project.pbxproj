@@ -12,7 +12,7 @@
 		F983F8FB2498C911001FDD1F /* MainScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983F8FA2498C911001FDD1F /* MainScreen1.swift */; };
 		F983F9002498C916001FDD1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F983F8FF2498C916001FDD1F /* Assets.xcassets */; };
 		F983F9032498C916001FDD1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F983F9012498C916001FDD1F /* LaunchScreen.storyboard */; };
-		F994638A249C4E6E00CC4106 /* LabelSaver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9946388249C4E6E00CC4106 /* LabelSaver.xcdatamodeld */; };
+		F994640824A219C600CC4106 /* LabelSaver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F994640624A219C600CC4106 /* LabelSaver.xcdatamodeld */; };
 		F9B769E82498D2A900BFE8AB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B769E72498D2A900BFE8AB /* CustomButton.swift */; };
 		F9B769EC2498E20A00BFE8AB /* MainScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B769EB2498E20A00BFE8AB /* MainScreen2.swift */; };
 /* End PBXBuildFile section */
@@ -25,7 +25,7 @@
 		F983F8FF2498C916001FDD1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F983F9022498C916001FDD1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F983F9042498C916001FDD1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F9946389249C4E6E00CC4106 /* LabelSaver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LabelSaver.xcdatamodel; sourceTree = "<group>"; };
+		F994640724A219C600CC4106 /* LabelSaver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LabelSaver.xcdatamodel; sourceTree = "<group>"; };
 		F9B769E72498D2A900BFE8AB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		F9B769EB2498E20A00BFE8AB /* MainScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				F983F8F62498C911001FDD1F /* AppDelegate.swift */,
+				F994640624A219C600CC4106 /* LabelSaver.xcdatamodeld */,
 				F983F8F82498C911001FDD1F /* SceneDelegate.swift */,
 				F983F8FA2498C911001FDD1F /* MainScreen1.swift */,
 				F9B769EB2498E20A00BFE8AB /* MainScreen2.swift */,
@@ -68,7 +69,6 @@
 				F983F9012498C916001FDD1F /* LaunchScreen.storyboard */,
 				F983F9042498C916001FDD1F /* Info.plist */,
 				F9B769E72498D2A900BFE8AB /* CustomButton.swift */,
-				F9946388249C4E6E00CC4106 /* LabelSaver.xcdatamodeld */,
 			);
 			path = "testAssignment App 1";
 			sourceTree = "<group>";
@@ -145,7 +145,7 @@
 			files = (
 				F9B769EC2498E20A00BFE8AB /* MainScreen2.swift in Sources */,
 				F9B769E82498D2A900BFE8AB /* CustomButton.swift in Sources */,
-				F994638A249C4E6E00CC4106 /* LabelSaver.xcdatamodeld in Sources */,
+				F994640824A219C600CC4106 /* LabelSaver.xcdatamodeld in Sources */,
 				F983F8FB2498C911001FDD1F /* MainScreen1.swift in Sources */,
 				F983F8F72498C911001FDD1F /* AppDelegate.swift in Sources */,
 				F983F8F92498C911001FDD1F /* SceneDelegate.swift in Sources */,
@@ -216,7 +216,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -340,12 +340,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F9946388249C4E6E00CC4106 /* LabelSaver.xcdatamodeld */ = {
+		F994640624A219C600CC4106 /* LabelSaver.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F9946389249C4E6E00CC4106 /* LabelSaver.xcdatamodel */,
+				F994640724A219C600CC4106 /* LabelSaver.xcdatamodel */,
 			);
-			currentVersion = F9946389249C4E6E00CC4106 /* LabelSaver.xcdatamodel */;
+			currentVersion = F994640724A219C600CC4106 /* LabelSaver.xcdatamodel */;
 			path = LabelSaver.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -9,13 +9,7 @@
 import UIKit
 import CoreData
 
-
-
-protocol MyDelegate: class {
-	func delegateButtonTapped()
-}
-
-class MainScreen1: UIViewController, MyDelegate {
+class MainScreen1: UIViewController {
 	
 	let persistentContainer: NSPersistentContainer = {
 		let container = NSPersistentContainer(name: "LabelSaver")
@@ -41,9 +35,8 @@ class MainScreen1: UIViewController, MyDelegate {
 	}
 	
 	override func viewDidLoad() {
-		super.viewDidLoad()
+		super.viewDidLoad()		
 		secondVC.delegate = self
-		
 		self.title = "Screen 1"
 		view.backgroundColor = .white
 		navigationItem.hidesBackButton = true
@@ -57,12 +50,15 @@ class MainScreen1: UIViewController, MyDelegate {
 		super.viewWillAppear(animated)
 		//setLabelFromDefaults()
 		setLabelFromCoreData()
+		secondVC.closureToRoot { (title) in
+			print("Closure called")
+			label.text = title
+		}
 		
 	}
 	
 	private func setButton() {
 		view.addSubview(button)
-		button.delegate = self
 		button.setTitle("Next Screen", for: .normal)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -89,8 +85,7 @@ class MainScreen1: UIViewController, MyDelegate {
 	}
 	
 	@objc private func buttonTapped(_ sender: CustomButton) {
-		
-		self.delegateButtonTapped()
+		navigationController?.pushViewController(secondVC, animated: true)
 		
 		
 		
@@ -124,20 +119,15 @@ class MainScreen1: UIViewController, MyDelegate {
 		}
 	}
 	
-	func delegateButtonTapped() {
-		let nextViewController = MainScreen2()
-		
-		
-		navigationController?.pushViewController(nextViewController, animated: true)
-	}
-	
 	
 }
 
 extension MainScreen1: PassData {
-	func transferData(dataFromVC2: String) {
-		label.text = dataFromVC2
+	func transferData(text: String) {
+		print("delegate called")
+		label.text = text
+		}
 	}
-	
-	
-}
+
+
+

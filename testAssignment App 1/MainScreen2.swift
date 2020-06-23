@@ -10,11 +10,11 @@ import UIKit
 import CoreData
 
 protocol PassData {
-	func transferData(dataFromVC2: String)
+	func transferData(text: String)
 }
 
 
-class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
+class MainScreen2: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
 	
 	private var button = CustomButton()
 	private var textField = UITextField()
@@ -38,6 +38,7 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		textField.delegate = self
+		
 		self.title = "Screen 2"
 		view.backgroundColor = .white
 		view.addGestureRecognizer(setupGestureRecognizer())
@@ -57,7 +58,6 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 	
 	private func setButton() {
 		view.addSubview(button)
-		button.delegate = self
 		button.setTitle("Back", for: .normal)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -84,57 +84,87 @@ class MainScreen2: UIViewController, MyDelegate, UITextFieldDelegate {
 		
 	}
 	
-	@objc private func buttonTapped(_ sender: CustomButton) {
+	fileprivate func delegatePopToRoot() {
 		
-		self.delegateButtonTapped()
-		
-		
-		
+		if let input = textField.text {
+			print(input)
+			self.delegate?.transferData(text: input)
+			self.navigationController?.popToRootViewController(animated: true)
+		}
 	}
 	
-	
-	func delegateButtonTapped() {
+	@objc private func buttonTapped(_ sender: CustomButton) {
 		deleteLastLabelFromCoreData()
 		
-
-		
-		//FIXED POP TO NAVIGATION CONTROLLER
-		
-		let input = textField.text!
-		if let rootVC = navigationController?.viewControllers.first as? MainScreen1 {
-			rootVC.input = input
-		}
+		//after popToRoot closure in View Will Appear gets calld
 		navigationController?.popToRootViewController(animated: true)
 		
 		
+		//delegatePopToRoot()
 		
-//		let destinationVC = MainScreen1()
-//		let input = textField.text!
+//		FIXED POP TO NAVIGATION CONTROLLER
 //
-//		if input == "" { self.navigationController?.popToRootViewController(animated: true) }
+//		popToNavigationController()
+
+
+//		SEGUE TO ROOT VIEW CONTROLLER
 //
-//		destinationVC.input = input
-//		navigationController?.pushViewController(destinationVC, animated: true)
+//		segueToRootViewController()
 //
 //
 //		ONE MORE WAY TO SAVE DATA    --> USER DEFAULTS
 //
 //		COMMENT OUT CODE BELLOW AND DELETE CODE ABOVE TO CHECK IT
 //		ALSO COMMENT OUT METHOD IN VIEW WILL APPEAR IN SCREEN 1
-//
-//		let input = textField.text!
-//		defaults.set(input, forKey: "SavedLabel")
-//		navigationController?.popViewController(animated: true)
+
+//		userDefaultsToRootController()
 
 
 //		ONE MORE WAY TO SAVE DATA    --> CORE DATA
 //
 //		COMMENT OUT CODE BELLOW AND DELETE CODE ABOVE TO CHECK IT
 //
-//
-//		deleteLastLabelFromCoreData()
-//		saveToCoreData()
-//		navigationController?.popViewController(animated: true)
+//		coreDataToRootViewController()
+		
+	}
+	
+	
+	func closureToRoot(completed: (String?) -> Void) {
+		let input = textField.text
+		completed(input)
+	}
+	
+
+	
+	private func coreDataToRootViewController() {
+		deleteLastLabelFromCoreData()
+		saveToCoreData()
+		navigationController?.popViewController(animated: true)
+	}
+	
+	
+	private func userDefaultsToRootController() {
+		let input = textField.text!
+		defaults.set(input, forKey: "SavedLabel")
+		navigationController?.popViewController(animated: true)
+	}
+	
+	private func segueToRootViewController() {
+		let destinationVC = MainScreen1()
+		let input = textField.text!
+		
+		if input == "" { self.navigationController?.popToRootViewController(animated: true) }
+		
+		destinationVC.input = input
+		navigationController?.pushViewController(destinationVC, animated: true)
+	}
+	
+	private func popToNavigationController() {
+		let input = textField.text!
+		if let rootVC = navigationController?.viewControllers.first as? MainScreen1 {
+			rootVC.input = input
+		}
+		navigationController?.popToRootViewController(animated: true)
 	}
 	
 	

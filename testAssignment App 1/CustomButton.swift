@@ -11,7 +11,6 @@ import UIKit
 class CustomButton: UIButton {
 	
 	
-	weak var delegate: MyDelegate?
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		setupButton()
