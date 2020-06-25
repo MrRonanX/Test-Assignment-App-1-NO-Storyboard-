@@ -96,7 +96,12 @@ class MainScreen2: UIViewController, UITextFieldDelegate, UINavigationController
 	@objc private func buttonTapped(_ sender: CustomButton) {
 		deleteLastLabelFromCoreData()
 		
-		//after popToRoot closure in View Will Appear gets calld
+	
+		
+		closureToRoot { input in
+			let rootVC = navigationController?.viewControllers.first as? MainScreen1
+			rootVC?.input = input
+		}
 		navigationController?.popToRootViewController(animated: true)
 		
 		
@@ -127,6 +132,8 @@ class MainScreen2: UIViewController, UITextFieldDelegate, UINavigationController
 //		coreDataToRootViewController()
 		
 	}
+	
+
 	
 	
 	func closureToRoot(completed: (String?) -> Void) {

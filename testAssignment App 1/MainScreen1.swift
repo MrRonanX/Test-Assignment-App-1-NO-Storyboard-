@@ -39,21 +39,22 @@ class MainScreen1: UIViewController {
 		secondVC.delegate = self
 		self.title = "Screen 1"
 		view.backgroundColor = .white
-		navigationItem.hidesBackButton = true
+		
 		
 		setupView()
 		
 		
 	}
 	
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		//setLabelFromDefaults()
 		setLabelFromCoreData()
-		secondVC.closureToRoot { (title) in
-			print("Closure called")
-			label.text = title
-		}
+//		secondVC.closureToRoot { (title) in
+//			print("Closure called")
+//			label.text = title
+//		}
 		
 	}
 	
